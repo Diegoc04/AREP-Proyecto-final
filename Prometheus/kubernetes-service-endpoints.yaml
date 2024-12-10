@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kubernetes-service-endpoints
+  namespace: monitoring
+  labels:
+    app: kubernetes-service-endpoints
+spec:
+  selector:
+    matchLabels:
+      app: kubernetes-service-endpoints
+  template:
+    metadata:
+      labels:
+        app: kubernetes-service-endpoints
+    spec:
+      containers:
+      - name: kubernetes-service-endpoints
+        image: gcr.io/google-containers/cadvisor:latest  # Asegúrate de usar la imagen correcta
+        ports:
+        - containerPort: 443
+          name: metrics
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubernetes-service-endpoints
+  namespace: monitoring
+spec:
+  ports:
+    - port: 443
+      targetPort: 443
+  selector:
+    app: kubernetes-service-endpoints

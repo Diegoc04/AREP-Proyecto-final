@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+  namespace: kube-system
+  labels:
+    k8s-app: kube-state-metrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: kube-state-metrics
+  template:
+    metadata:
+      labels:
+        k8s-app: kube-state-metrics
+    spec:
+      containers:
+      - name: kube-state-metrics
+        image: docker.io/prometheus/kube-state-metrics:v2.10.0
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi

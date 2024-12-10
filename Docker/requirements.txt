@@ -1,0 +1,5 @@
+flask
+tensorflow
+requests
+pandas
+scikit-learn

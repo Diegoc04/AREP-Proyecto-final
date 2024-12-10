@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-predictive-model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-predictive-model
+  template:
+    metadata:
+      labels:
+        app: flask-predictive-model
+    spec:
+      containers:
+      - name: flask-predictive-model
+        image: diegoc04/flask-predictive-model:latest
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: "200m"  # Solicitud mínima de 200 milicores (0.2 vCPU)
+          limits:
+            cpu: "500m"  # Límite máximo de 500 milicores (0.5 vCPU)
+
