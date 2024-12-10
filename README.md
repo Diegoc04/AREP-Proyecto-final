@@ -125,6 +125,7 @@ Visual Studio Code: 1.95.1
 
 ## Autores
 Diego Fernando Castellanos Amaya - [Diegoc04](https://github.com/Diegoc04)
+
 Daniel Santiago Torres Acosta - [RulosS290](https://github.com/RulosS290)
 
 ## Agradecimientos
